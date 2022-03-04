@@ -46,7 +46,7 @@ export default {
         let title = '';
         // let postId = this.$route.query.postId
         if (postId) {
-            const {data} = await this.$Axios.get('http://localhost:3000/api/post/'+postId);
+            const {data} = await this.$Axios.get('api/post/'+postId);
             title = data.title;
             console.log('data:'+postId + ':'+title);
             this.$store.dispatch("setStoryTitle", title);

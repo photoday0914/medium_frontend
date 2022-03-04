@@ -83,7 +83,7 @@ export default ({
                 content: this.myComment,
                 response_count: responseCount
             };
-            this.$Axios.post("http://localhost:3000/api/comment/"+postId, body).then((res) => {
+            this.$Axios.post("api/comment/"+postId, body).then((res) => {
                 
                 if (res.data.msg == 'ok') {                    
                     this.$emit('msg', res.data.data);

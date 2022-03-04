@@ -151,7 +151,7 @@
     methods: {
        ...mapMutations(['getMe']),
       infiniteHandler($state) {
-         this.$Axios.get('http://localhost:3000/api/posts/'+this.loadNum)
+         this.$Axios.get('/api/posts/'+this.loadNum)
          .then(res => {
                if(res.data.totalPages == this.loadNum){
                   $state.complete();
@@ -178,7 +178,7 @@
 
       getPosts() {
          this.getRecommendedTags();
-         this.$Axios.get('http://localhost:3000/api/posts/offset/'+this.loadNum)
+         this.$Axios.get('/api/posts/offset/'+this.loadNum)
          .then(res => {         
             for(let key in res.data){
                this.posts.push(res.data[key])
@@ -193,8 +193,8 @@
 
       getFollowing() {
          // console.log("getFollowing:"+this.getUser.id); 
-         //  console.log('http://localhost:3000/api/users/'+this.getUser.id+'/following');
-          this.$Axios.get('http://localhost:3000/api/users/'+this.getUser.id+'/following')
+         //  console.log('/api/users/'+this.getUser.id+'/following');
+          this.$Axios.get('/api/users/'+this.getUser.id+'/following')
          .then(res => {                    
             for(let key in res.data){
                this.followings.push(res.data[key])

@@ -59,7 +59,7 @@ export default {
       };
 
       axios
-        .post("http://localhost:3000/api/auth/signup", args)
+        .post("https://my-first-app-0304.herokuapp.com/api/auth/signup", args)
         .then((res) => {
           alert("registered successfully");
           this.account = res.data;

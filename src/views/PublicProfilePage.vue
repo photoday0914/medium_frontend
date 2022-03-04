@@ -174,7 +174,7 @@
         },
          
       getPosts(userId) {         
-         this.$Axios.get('http://localhost:3000/api/posts/'+userId)
+         this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/posts/'+userId)
          .then(res => {  
             //  console.log(res); 
             this.posts = [];      
@@ -190,7 +190,7 @@
 
       getFollowing() {
         
-          this.$Axios.get('http://localhost:3000/api/users/'+this.author.id+'/following')
+          this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/users/'+this.author.id+'/following')
          .then(res => {    
             this.followings = [];                
             for(let key in res.data){
@@ -225,20 +225,20 @@
         const body = {
             followed_id : followedId
         }
-        this.$Axios.post('http://localhost:3000/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
+        this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
             if (res.data.msg == 'ok') this.isFollow = true;
         });
     },
     //"/api/users/:id/follow/:target_id"
     unfollowAuthor(followedId) {
-        this.$Axios.delete('http://localhost:3000/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
+        this.$Axios.delete('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
             if (res.data.msg == 'delete') this.isFollow = false;
         });
     },
 
      //"/api/users/:id/follow/:target_id"
     checkFollowing(followedId) {
-        this.$Axios.get('http://localhost:3000/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
+        this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
             if (res.data.msg == 'exist') this.isFollow = true;
         });
     },

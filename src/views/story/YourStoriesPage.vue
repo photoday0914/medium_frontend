@@ -114,9 +114,9 @@ export default {
          router.push('/edit?postId='+postId);
       },
       deleteStory(postId) {
-         console.log('http://localhost:3000/api/post/'+postId);
+         console.log('https://my-first-app-0304.herokuapp.com/api/post/'+postId);
          
-         this.$Axios.delete('http://localhost:3000/api/post/'+postId).then(() => {
+         this.$Axios.delete('https://my-first-app-0304.herokuapp.com/api/post/'+postId).then(() => {
             
             var filtered = this.posts.filter(function(value){ 
                return value.id != postId;
@@ -126,7 +126,7 @@ export default {
          })
       },
       async getMyPosts() {
-         this.$Axios.get('http://localhost:3000/api/posts/'+this.getUser.id)
+         this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/posts/'+this.getUser.id)
          .then(res => {           
             for(let key in res.data){
                this.posts.push(res.data[key])

@@ -47,7 +47,7 @@ import router from '../../router'
          const confirmation_code = urlParams.get('confirmation_code')
          console.log(confirmation_code)
          axios
-        .get("http://localhost:3000/api/auth/confirm/".concat(confirmation_code))
+        .get("https://my-first-app-0304.herokuapp.com/api/auth/confirm/".concat(confirmation_code))
         .then(async res => {
             // console.log(res);
 

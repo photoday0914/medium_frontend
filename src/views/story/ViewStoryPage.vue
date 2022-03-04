@@ -219,8 +219,8 @@ export default ({
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const postId = urlParams.get('postId');
-            // const {data} = await this.$Axios.get('http://localhost:3000/api/post/'+postId);
-            this.$Axios.get('http://localhost:3000/api/post/'+postId).then((data)=> {
+            // const {data} = await this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/post/'+postId);
+            this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/post/'+postId).then((data)=> {
                 this.post = data.data;
                 this.loading = false;
                 if (this.getUser.id == 0) {
@@ -245,8 +245,8 @@ export default ({
                 post_id: postId,
                 is_response: type
             }
-            // console.log('http://localhost:3000/api/users/'+this.getUser.id+'/favorites/create');
-            this.$Axios.post('http://localhost:3000/api/users/'+this.getUser.id+'/favorites/create', body).then((res) => {                
+            // console.log('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/favorites/create');
+            this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/favorites/create', body).then((res) => {                
                 if (res.data.msg == 'ok') this.post.clap_count += 1;
                 this.isClap = true;
             });
@@ -256,20 +256,20 @@ export default ({
             const body = {
                 followed_id : followedId
             }
-            this.$Axios.post('http://localhost:3000/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
+            this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
                 if (res.data.msg == 'ok') this.isFollow = true;
             });
         },
         //"/api/users/:id/follow/:target_id"
         unfollowAuthor(followedId) {
-            this.$Axios.delete('http://localhost:3000/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
+            this.$Axios.delete('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
                 if (res.data.msg == 'delete') this.isFollow = false;
             });
         },
 
         //"/api/users/:id/follow/:target_id"
         checkFollowing(followedId) {
-            this.$Axios.get('http://localhost:3000/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
+            this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
                 if (res.data.msg == 'exist') this.isFollow = true;
             });
         },
@@ -285,7 +285,7 @@ export default ({
         },       
 
         async getHashtags(postId) {
-            const {data} = await this.$Axios.get("http://localhost:3000/api/hashtags/post/"+postId);
+            const {data} = await this.$Axios.get("https://my-first-app-0304.herokuapp.com/api/hashtags/post/"+postId);
             // console.log(data);
             this.chips = data;
         },
@@ -310,7 +310,7 @@ export default ({
                 content: this.myComment,
                 response_count: responseCount
             };
-            this.$Axios.post("http://localhost:3000/api/comment/"+postId, body).then((res) => {
+            this.$Axios.post("https://my-first-app-0304.herokuapp.com/api/comment/"+postId, body).then((res) => {
                     if (res.data.msg == 'ok') {
                         this.getComments(postId);
                         this.post.response_count += 1;                       

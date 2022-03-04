@@ -107,7 +107,7 @@ export default {
     const postId = urlParams.get('postId')
    
     // let postId = this.$route.query.postId
-    const {data} = await this.$Axios.get('http://localhost:3000/api/post/'+postId);
+    const {data} = await this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/post/'+postId);
     this.content2 = data.content;
 
     // console.log("data:"+data);
@@ -143,7 +143,7 @@ export default {
         formData.append('image', this.chosenfile);
 
         try {
-          const {data} = await this.$Axios.post('http://localhost:3000/api/users/upload/'.concat(this.getUser.id), formData, {
+          const {data} = await this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/upload/'.concat(this.getUser.id), formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
               }
@@ -166,8 +166,8 @@ export default {
           hashtags: this.chips
         }
         console.log(this.getStoryTitle);
-        // console.log('http://localhost:3000/api/post/update/'+postId);
-        await this.$Axios.post('http://localhost:3000/api/post/update/'+postId, body)
+        // console.log('https://my-first-app-0304.herokuapp.com/api/post/update/'+postId);
+        await this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/post/update/'+postId, body)
         router.push('/stories')
       },
 
@@ -177,7 +177,7 @@ export default {
       },
       // "/api/hashtags/:postId"
       async getHashtags(postId) {
-        const {data} = await this.$Axios.get("http://localhost:3000/api/hashtags/post/"+postId);
+        const {data} = await this.$Axios.get("https://my-first-app-0304.herokuapp.com/api/hashtags/post/"+postId);
         // console.log(data);
         this.chips = data;
       }
