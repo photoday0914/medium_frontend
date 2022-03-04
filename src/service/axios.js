@@ -6,7 +6,7 @@ import router from '../router'
 // import { refreshToken } from '../service/login'
 
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://my-first-app-0304.herokuapp.com';
 
 // const instance = axios.create({
 //   baseURL: 'http://localhost:3000',
