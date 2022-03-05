@@ -55,7 +55,7 @@
             }
         },
         computed: {
-            ...mapGetters(["getmenuItems", "getUser"]),
+            ...mapGetters(["getmenuItems", "getUser", 'getRefreshToken']),
         },
         mounted() {
          
