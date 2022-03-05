@@ -134,7 +134,7 @@ export default {
         formData.append('image', this.chosenfile);
 
         try {
-          const {data} = await this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/upload/'.concat(this.getUser.id), formData, {
+          const {data} = await this.$Axios.post('/api/users/upload/'.concat(this.getUser.id), formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
               }
@@ -155,7 +155,7 @@ export default {
         }
         // console.log(this.chips);
         
-        await this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/posts/'.concat(this.getUser.id), body)
+        await this.$Axios.post('/api/posts/'.concat(this.getUser.id), body)
         router.push('/stories')
         // console.log(this.content2);
         // console.log(this.getStoryTitle);

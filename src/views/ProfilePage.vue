@@ -143,7 +143,7 @@
         // }
         // this.setUser(user);
         
-        await this.$Axios.put("https://my-first-app-0304.herokuapp.com/api/users/".concat(this.getUser.id), this.getUser)
+        await this.$Axios.put("/api/users/"+this.getUser.id, this.getUser)
         
       },
 
@@ -167,7 +167,7 @@
         formData.append('image', this.image);
 
         try {
-          const {data} = await this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/avatar/'.concat(this.getUser.id), formData, {
+          const {data} = await this.$Axios.post('/api/users/avatar/'.concat(this.getUser.id), formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
               }

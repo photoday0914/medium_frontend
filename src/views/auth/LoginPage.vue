@@ -44,8 +44,10 @@
 
 <script>
 import axios from "axios";
+import config from '../../config/config'
 // import SocialLogin from '../../components/SocialLoginPage.vue'
 import { mapMutations } from "vuex";
+
 
 // import { reactive } from "vue";
 
@@ -75,7 +77,7 @@ export default {
       };
 
       axios
-        .post("https://my-first-app-0304.herokuapp.com/api/auth/signin", args)
+        .post(config.baseUrl+"/api/auth/signin", args)
         .then((res) => {
           alert(res.data.message);          
          
@@ -92,7 +94,7 @@ export default {
       };
 
       axios
-        .post("https://my-first-app-0304.herokuapp.com/api/auth/signup", args)
+        .post(config.baseUrl+"/api/auth/signup", args)
         .then((res) => {
           alert(res.data);          
         })

@@ -22,7 +22,7 @@ import { refreshToken } from './service/login'
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: LandingPage, meta: { unauthorized : true } },
+  { path: '/', component: LandingPage, meta: { unauthorized : true }, name: 'landingPage' },
   { path: '/login', component: LoginPage, meta: { unauthorized : true } },
   { path: '/register', component: RegisterPage, meta: { unauthorized : true } },  
   { path: '/login-redirect', component: LoginRedirectPage, meta: { unauthorized : true }},
@@ -48,7 +48,9 @@ router.beforeEach( async(to, from, next) => {
   if(VueCookies.get('token')===null && VueCookies.get('refreshToken') !== null){
     await refreshToken();
   }
-
+  if (to.name === 'landingPage' && VueCookies.get('token')) {
+    return next('/dashboard');
+  }
   if (to.matched.some(record => record.meta.unauthorized) || VueCookies.get('token')){
     return next();
   }

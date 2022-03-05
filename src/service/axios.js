@@ -2,11 +2,10 @@ import axios from 'axios';
 import VueCookies from 'vue-cookies';
 import store from '../store'
 import router from '../router'
-// import { mapGetters } from 'vuex';
-// import { refreshToken } from '../service/login'
+import config from '../config/config'
 
 
-axios.defaults.baseURL = 'https://my-first-app-0304.herokuapp.com';
+axios.defaults.baseURL = config.baseUrl;
 
 // const instance = axios.create({
 //   baseURL: 'http://localhost:3000',

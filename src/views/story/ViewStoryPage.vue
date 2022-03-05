@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <Header/>
-        <SideMenu/>
+        <!-- <SideMenu/> -->
         <template v-if="loading">
             <v-progress-linear indeterminate color="yellow darken-2"></v-progress-linear>
         </template>
@@ -166,7 +166,7 @@
 <script>
 import Header from '../../components/Header.vue'
 import Comment from '../../components/Comment.vue'
-import SideMenu from '../../components/SideMenu.vue'
+// import SideMenu from '../../components/SideMenu.vue'
 import { mapGetters} from "vuex";
 
 export default ({
@@ -190,24 +190,21 @@ export default ({
             isShowWindow: {}
         }
     },
-    mounted() {
-        this.$Axios.get("/api/users/me")
-        .then((res) => {
-            // console.log(res);
-            this.$store.dispatch('setUser', res.data);            
-        }).catch((err) => {
-            console.log(err);
-        })    
-        this.getPost();
-        
+    async mounted() {        
+        if (this.getRefreshToken != null) {
+            const {data} = await this.$Axios.get("/api/users/me")           
+            this.$store.dispatch('setUser', data);
+          
+        }
+        this.getPost();       
     },
     computed: {
-        ...mapGetters(['getUser'])
+        ...mapGetters(['getUser', 'getRefreshToken'])
     },
     components: {
-      Header,
-      Comment,
-        SideMenu,
+        Header,
+        Comment,
+        // SideMenu,
    },
     methods: {
         pushComment(data) {            
@@ -219,8 +216,8 @@ export default ({
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const postId = urlParams.get('postId');
-            // const {data} = await this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/post/'+postId);
-            this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/post/'+postId).then((data)=> {
+            // const {data} = await this.$Axios.get('/api/post/'+postId);
+            this.$Axios.get('/api/post/'+postId).then((data)=> {
                 this.post = data.data;
                 this.loading = false;
                 if (this.getUser.id == 0) {
@@ -245,8 +242,8 @@ export default ({
                 post_id: postId,
                 is_response: type
             }
-            // console.log('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/favorites/create');
-            this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/favorites/create', body).then((res) => {                
+            // console.log('/api/users/'+this.getUser.id+'/favorites/create');
+            this.$Axios.post('/api/users/'+this.getUser.id+'/favorites/create', body).then((res) => {                
                 if (res.data.msg == 'ok') this.post.clap_count += 1;
                 this.isClap = true;
             });
@@ -256,36 +253,41 @@ export default ({
             const body = {
                 followed_id : followedId
             }
-            this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
+            this.$Axios.post('/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
                 if (res.data.msg == 'ok') this.isFollow = true;
             });
         },
         //"/api/users/:id/follow/:target_id"
         unfollowAuthor(followedId) {
-            this.$Axios.delete('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
+            this.$Axios.delete('/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
                 if (res.data.msg == 'delete') this.isFollow = false;
             });
         },
 
         //"/api/users/:id/follow/:target_id"
         checkFollowing(followedId) {
-            this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
-                if (res.data.msg == 'exist') this.isFollow = true;
-            });
+            if (this.getRefreshToken != null) {
+                this.$Axios.get('/api/users/'+this.getUser.id+'/follow/'+followedId).then((res) => {                
+                    if (res.data.msg == 'exist') this.isFollow = true;
+                });
+            }
         },
         //"/api/users/:userId/favorites/:postId"
         checkPostClap(postId) {
-            //if post author is me, hide clap button
-            if (this.post.user_id == this.getUser.id) this.isClap = true;
-            else {            
-                this.$Axios.get("/api/users/"+this.getUser.id+"/favorites/"+postId).then((res) => {
-                    if (res.data.msg == 'exist') this.isClap = true;
-                });
-            }          
+            if (this.getRefreshToken != null) {
+                //if post author is me, hide clap button
+                if (this.post.user_id == this.getUser.id) this.isClap = true;
+                else {            
+                    this.$Axios.get("/api/users/"+this.getUser.id+"/favorites/"+postId).then((res) => {
+                        if (res.data.msg == 'exist') this.isClap = true;
+                        else this.isClap = false;
+                    });
+                }
+            } else this.isClap = true;
         },       
 
         async getHashtags(postId) {
-            const {data} = await this.$Axios.get("https://my-first-app-0304.herokuapp.com/api/hashtags/post/"+postId);
+            const {data} = await this.$Axios.get("/api/hashtags/post/"+postId);
             // console.log(data);
             this.chips = data;
         },
@@ -310,7 +312,7 @@ export default ({
                 content: this.myComment,
                 response_count: responseCount
             };
-            this.$Axios.post("https://my-first-app-0304.herokuapp.com/api/comment/"+postId, body).then((res) => {
+            this.$Axios.post("/api/comment/"+postId, body).then((res) => {
                     if (res.data.msg == 'ok') {
                         this.getComments(postId);
                         this.post.response_count += 1;                       

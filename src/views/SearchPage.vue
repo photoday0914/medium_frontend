@@ -278,20 +278,20 @@ export default {
             const body = {
                 followed_id : user.id
             }
-            this.$Axios.post('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
+            this.$Axios.post('/api/users/'+this.getUser.id+'/follow', body).then((res) => {                
                 if (res.data.msg == 'ok') user.isFollow = true;
             });
         },
 
         unfollow(user) {
-            this.$Axios.delete('https://my-first-app-0304.herokuapp.com/api/users/'+this.getUser.id+'/follow/'+user.id).then((res) => {                
+            this.$Axios.delete('/api/users/'+this.getUser.id+'/follow/'+user.id).then((res) => {                
                 if (res.data.msg == 'delete') user.isFollow = false;
             });
         },
 
 
         getPostsWithTag(tagId) {
-             this.$Axios.get('https://my-first-app-0304.herokuapp.com/api/post/hashtag/'+tagId).then((res) => {                         
+             this.$Axios.get('/api/post/hashtag/'+tagId).then((res) => {                         
                 this.hashtag_posts = res.data;
                 // console.log(this.hashtag_posts);
                 this.$forceUpdate();

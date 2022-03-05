@@ -4,22 +4,11 @@
       <v-toolbar dense>                 
          <v-toolbar-title ><div class="font-weight-medium">Medium</div></v-toolbar-title>         
          <v-spacer></v-spacer>
-         <router-link    
-            to="/login" tag="div">
-            <v-btn
-            class="ma-2"  
-            outlined                      
-            color="#009688"       
-            >SingIn
-            </v-btn>
+         <router-link to="/login" tag="div">
+            <v-btn class="ma-2"  outlined  color="#009688">SingIn</v-btn>
          </router-link>
          <router-link to="/register" tag="div">
-            <v-btn
-               class="ma-2"  
-               outlined                      
-               color="#2979FF"            
-            >GetStarted
-            </v-btn>
+            <v-btn class="ma-2" outlined color="#2979FF">GetStarted</v-btn>
          </router-link>
       </v-toolbar>
    </v-card> 
@@ -28,6 +17,7 @@
 
 <script>
 import axios from "axios";
+import config from '../../config/config'
 import { mapMutations } from "vuex";
 import router from '../../router'
   export default {
@@ -47,7 +37,7 @@ import router from '../../router'
          const confirmation_code = urlParams.get('confirmation_code')
          console.log(confirmation_code)
          axios
-        .get("https://my-first-app-0304.herokuapp.com/api/auth/confirm/".concat(confirmation_code))
+        .get(config.baseUrl+"/api/auth/confirm/".concat(confirmation_code))
         .then(async res => {
             // console.log(res);
 
@@ -65,8 +55,7 @@ import router from '../../router'
             }
             this.$store.dispatch('setUser', user)
             this.$store.dispatch('setToken', token)
-
-            console.log("here:".concat(this.$store.state.user.id));
+            this.$store.dispatch('setLoggedIn', true);
 
             router.push('/dashboard')
         })

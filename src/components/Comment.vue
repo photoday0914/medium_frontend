@@ -22,7 +22,7 @@
                 </v-container> -->
                 <!-- <v-container> -->
                     <v-col align="right">
-                    <v-btn @click="isShowWindow = !isShowWindow " >
+                    <v-btn :disabled="isComment" @click="isShowWindow = !isShowWindow " >
                         <v-icon color="blue darken-2">
                         mdi-message-text
                         </v-icon>
@@ -67,11 +67,11 @@ export default ({
     },
 
     computed: {
-        ...mapGetters(['getUser'])
+        ...mapGetters(['getUser', 'getRefreshToken'])
     },
 
     mounted() {
-        if (this.getUser.id == 0) this.isComment = true;
+        if (this.getUser.id == 0 || this.getRefreshToken == null) this.isComment = true;
     },
 
     methods: {

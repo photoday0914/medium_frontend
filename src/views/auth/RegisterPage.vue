@@ -40,7 +40,7 @@
 
 <script>
 import axios from "axios";
-
+import config from '../../config/config'
 export default {
   data() {
     return {
@@ -59,7 +59,7 @@ export default {
       };
 
       axios
-        .post("https://my-first-app-0304.herokuapp.com/api/auth/signup", args)
+        .post(config.baseUrl+"/api/auth/signup", args)
         .then((res) => {
           alert("registered successfully");
           this.account = res.data;
