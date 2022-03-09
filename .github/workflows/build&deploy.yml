@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-      - name: npm install
+
+      - name: NPM install
         run: npm install
         
       - name: Build task
