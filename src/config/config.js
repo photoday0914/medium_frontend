@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'https://my-first-app-0304.herokuapp.com'
+    baseUrl: 'http://34.238.51.25:3000'
 };
