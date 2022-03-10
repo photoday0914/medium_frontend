@@ -1,0 +1,13 @@
+#/appspec.yml
+
+version: 0.0
+os: linux
+files:
+# source is project bases, destination is instance based, 
+# source copied into destination
+  - source: /
+    destination: /home/ubuntu/build
+hooks:
+  AfterInstall:
+    - location: /start.sh
+      runas: root
