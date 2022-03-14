@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'http://34.238.51.25:3000'
+    baseUrl: 'http://ec2-3-83-2-186.compute-1.amazonaws.com:80'
 };
