@@ -159,6 +159,7 @@
 <script>
 import axios from "axios";
 import router from '../router'
+import config from '../config/config'
 // import SocialLogin from '../components/SocialLoginPage.vue'
 
   export default {
@@ -178,7 +179,7 @@ import router from '../router'
     methods: {
        GetPosts() {    
          axios
-        .get("http://34.238.51.25:3000/api/posts/trending")
+        .get(config.baseUrl+"/api/posts/trending")
         .then(res => {
          //  console.log(this.posts);
           for (var i of res.data)
