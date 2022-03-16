@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'http://d3s8otq8j57zz9.cloudfront.net:3000'
+    baseUrl: 'http://ec2-3-83-2-186.compute-1.amazonaws.com:3000'
 };
