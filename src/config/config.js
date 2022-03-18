@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'http://dnyfixrh3zi91.cloudfront.net:3000'
+    baseUrl: 'http://d3pyg5ro5lpu2a.cloudfront.net'     //backend url(including port)
 };
