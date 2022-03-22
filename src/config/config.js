@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'http://d3pyg5ro5lpu2a.cloudfront.net'     //backend url(including port)
+    baseUrl: 'http://banana.happybirthdayhub.com'     //backend url(including port)
 };
